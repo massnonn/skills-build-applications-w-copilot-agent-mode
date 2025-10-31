@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-
 const Activities = () => {
   const [activities, setActivities] = useState([]);
   const codespace = process.env.REACT_APP_CODESPACE_NAME;
@@ -20,13 +19,36 @@ const Activities = () => {
   }, [endpoint]);
 
   return (
-    <div>
-      <h2>Activities</h2>
-      <ul>
-        {activities.map((a, i) => (
-          <li key={i}>{a.user ? a.user.username : ''} - {a.workout ? a.workout.name : ''} ({a.duration_minutes} min)</li>
-        ))}
-      </ul>
+    <div className="card mb-4">
+      <div className="card-body">
+        <h2 className="card-title mb-4">Activities</h2>
+        <div className="table-responsive">
+          <table className="table table-striped table-hover">
+            <thead className="table-dark">
+              <tr>
+                <th>#</th>
+                <th>User</th>
+                <th>Workout</th>
+                <th>Date</th>
+                <th>Duration (min)</th>
+                <th>Calories</th>
+              </tr>
+            </thead>
+            <tbody>
+              {activities.map((a, i) => (
+                <tr key={i}>
+                  <td>{i + 1}</td>
+                  <td>{a.user ? a.user.username : ''}</td>
+                  <td>{a.workout ? a.workout.name : ''}</td>
+                  <td>{a.date ? new Date(a.date).toLocaleString() : ''}</td>
+                  <td>{a.duration_minutes}</td>
+                  <td>{a.calories_burned}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   );
 };

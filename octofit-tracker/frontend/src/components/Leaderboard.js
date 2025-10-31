@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-
 const Leaderboard = () => {
   const [leaderboard, setLeaderboard] = useState([]);
   const codespace = process.env.REACT_APP_CODESPACE_NAME;
@@ -20,13 +19,32 @@ const Leaderboard = () => {
   }, [endpoint]);
 
   return (
-    <div>
-      <h2>Leaderboard</h2>
-      <ul>
-        {leaderboard.map((l, i) => (
-          <li key={i}>{l.team ? l.team.name : ''} - {l.total_points} pts (pos: {l.position})</li>
-        ))}
-      </ul>
+    <div className="card mb-4">
+      <div className="card-body">
+        <h2 className="card-title mb-4">Leaderboard</h2>
+        <div className="table-responsive">
+          <table className="table table-striped table-hover">
+            <thead className="table-dark">
+              <tr>
+                <th>#</th>
+                <th>Team</th>
+                <th>Total Points</th>
+                <th>Position</th>
+              </tr>
+            </thead>
+            <tbody>
+              {leaderboard.map((l, i) => (
+                <tr key={i}>
+                  <td>{i + 1}</td>
+                  <td>{l.team ? l.team.name : ''}</td>
+                  <td>{l.total_points}</td>
+                  <td>{l.position}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   );
 };

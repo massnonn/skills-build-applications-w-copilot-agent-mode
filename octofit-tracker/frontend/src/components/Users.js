@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-
 const Users = () => {
   const [users, setUsers] = useState([]);
   const codespace = process.env.REACT_APP_CODESPACE_NAME;
@@ -20,13 +19,32 @@ const Users = () => {
   }, [endpoint]);
 
   return (
-    <div>
-      <h2>Users</h2>
-      <ul>
-        {users.map((u, i) => (
-          <li key={i}>{u.username} ({u.email}) - {u.team ? u.team.name : ''}</li>
-        ))}
-      </ul>
+    <div className="card mb-4">
+      <div className="card-body">
+        <h2 className="card-title mb-4">Users</h2>
+        <div className="table-responsive">
+          <table className="table table-striped table-hover">
+            <thead className="table-dark">
+              <tr>
+                <th>#</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Team</th>
+              </tr>
+            </thead>
+            <tbody>
+              {users.map((u, i) => (
+                <tr key={i}>
+                  <td>{i + 1}</td>
+                  <td>{u.username}</td>
+                  <td>{u.email}</td>
+                  <td>{u.team ? u.team.name : ''}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   );
 };
